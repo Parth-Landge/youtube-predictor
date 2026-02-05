@@ -43,14 +43,13 @@ else:
     st.write("Enter the video stats below to predict how many **Views** it will get.")
 
     user_inputs = []
-        for col in feature_names:
+    for col in feature_names:
         if "Day_Encoded" in col:
             val = st.selectbox("Day of Week", options=[0,1,2,3,4,5,6], format_func=lambda x: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][x])
         else:
             val = st.number_input(f"Enter {col}", value=0.0)
         user_inputs.append(val)
-
-    if st.button("Predict Views"):
+        if st.button("Predict Views"):
         final_input = np.array([user_inputs])
         
         prediction = model.predict(final_input)
@@ -58,3 +57,4 @@ else:
         # Show result
 
         st.success(f"📈 Predicted Views: {int(prediction[0]):,}")
+
